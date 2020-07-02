@@ -15,6 +15,8 @@ public class stopwatch_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch_screen);
         chip=findViewById(R.id.chipnavi);
+        chip.setItemSelected(R.id.nav_stopwatch,true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StopwatchFragment()).commit();
         chip.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
