@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".stopwatch_screen"
     android:background="#121212"
-    android:id="@+id/mainlayout">
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@id/chipnavi"/>
+    android:id="@+id/fragment_container">
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/chipnavi"
@@ -22,11 +16,11 @@
         android:layout_margin="30dp"
         android:background="@drawable/custombottomnav"
         android:elevation="8dp"
-        app:cnb_iconSize="24dp"
+        app:cnb_iconSize="28dp"
         app:cnb_menuResource="@menu/bottom_navigation"
         app:cnb_orientationMode="horizontal"
         app:cnb_radius="10dp"
-        app:cnb_unselectedColor="#000000" />
+        app:cnb_unselectedColor="#24FF2D" />
 
 
 

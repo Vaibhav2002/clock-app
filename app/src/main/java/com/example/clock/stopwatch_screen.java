@@ -1,6 +1,7 @@
 package com.example.clock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -14,11 +15,19 @@ public class stopwatch_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch_screen);
         chip=findViewById(R.id.chipnavi);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new stopwatchfrag()).commit();
         chip.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-
+                Fragment frag=null;
+                switch (i)
+                {
+                    case R.id.nav_stopwatch:
+                        frag=new StopwatchFragment();
+                        break;
+                    case R.id.nav_timer:
+                        frag=new TimerFragment();
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,frag).commit();
             }
         });
     }
