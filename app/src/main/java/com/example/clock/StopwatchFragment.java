@@ -4,61 +4,64 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StopwatchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StopwatchFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StopwatchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StopwatchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StopwatchFragment newInstance(String param1, String param2) {
-        StopwatchFragment fragment = new StopwatchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    Chronometer chronometer;
+    Button start, pause, reset;
+    boolean running;
+    long pauseoffset;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stopwatch, container, false);
+        View view = inflater.inflate(R.layout.fragment_stopwatch, container, false);
+        chronometer = view.findViewById(R.id.chronometer2);
+        start = view.findViewById(R.id.stopwatch_start);
+        pause = view.findViewById(R.id.stopwatch_pause);
+        reset = view.findViewById(R.id.stopwatch_reset);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!running) {
+                    chronometer.setBase(SystemClock.elapsedRealtime() - pauseoffset);
+                    chronometer.start();
+                    running = true;
+                    start.setVisibility(View.GONE);
+                    pause.setVisibility(View.VISIBLE);
+                    reset.setVisibility(View.GONE);
+                }
+            }
+        });
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (running) {
+                    chronometer.stop();
+                    pauseoffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    running = false;
+                    pause.setVisibility(View.GONE);
+                    start.setVisibility(View.VISIBLE);
+                    reset.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                pauseoffset = 0;
+                reset.setVisibility(View.GONE);
+                start.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return view;
+
     }
 }
