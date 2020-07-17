@@ -1,19 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimerFragment"
-    android:background="#000000">
+    android:background="#000000"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".TimerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="50sp"
-        android:textAlignment="center"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:textColor="#ffffff"/>
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/min"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#80ffffff"
+            android:text="00"
+            android:maxLines="1"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="70sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=":"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="70sp" />
+
+        <EditText
+            android:id="@+id/sec"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#80ffffff"
+            android:text="00"
+            android:maxLines="1"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="70sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/checkboxbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            app:lottie_rawRes="@raw/checkbox2" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/timedisp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="00:00"
+        android:textColor="#ffffff"
+        android:textSize="100sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:orientation="horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/playpausebutton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginRight="50dp"
+            app:lottie_rawRes="@raw/playbutton" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/stopbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            app:lottie_rawRes="@raw/stopbutton"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
